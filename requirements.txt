@@ -2,4 +2,3 @@ ultralytics==8.1.23
 streamlit
 Pillow
 opencv-python-headless==4.10.0.84
-mesa-libGL-cos6-x86_64
