@@ -1,5 +1,3 @@
-ultralytics
-streamlit
-pathlib
-PIL
-sys
+ultralytics==8.1.23
+streamlit==1.40.0
+Pillow
