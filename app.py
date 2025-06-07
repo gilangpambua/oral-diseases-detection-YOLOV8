@@ -6,7 +6,7 @@ import config
 
 @st.cache_resource
 def load_model(model_path):
-    model = YOLO(model_path)
+    model = YOLO(str(model_path))
     return model
 
 st.set_page_config(
