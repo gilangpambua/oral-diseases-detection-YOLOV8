@@ -24,6 +24,6 @@ DETECTION_MODEL_LIST = [
     "Best_YOLOV8N.pt",
     "Best_YOLOV8S.pt",
     "Best_YOLOV8M.pt",
-    "bestN.pt,",
+    "bestN.pt",
     "bestS.pt",
     "bestM.pt"]
