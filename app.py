@@ -101,4 +101,12 @@ else:
     if not model:
         st.warning("Model is not loaded yet.")
     if not source_img:
-        st.info("Please upload an image to perform detection.")
+        st.info("Please upload an pictures of oral diseases to perform detection.")
+
+st.markdown("---")
+st.markdown(
+    "<div style='text-align: center; font-size: 14px;'>"
+    "Created by <strong>Gilang Pappa' Tanto Pambua</strong>"
+    "</div>",
+    unsafe_allow_html=True
+)
