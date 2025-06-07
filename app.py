@@ -38,14 +38,18 @@ model = None
 
 if model_type:
     model_path = config.DETECTION_MODEL_DIR / model_type
+
+    st.write(f"🔍 Absolute model path: {model_path.resolve()}")  # <-- Tambahkan di sini
+
     if not model_path.exists():
-        st.error(f"Model file does NOT exist at path:\n{model_path}")
+        st.error(f"❌ Model file does NOT exist at path:\n{model_path}")
     else:
         try:
-            model = load_model(str(model_path))
+            model = load_model(str(model_path))  # convert to string
         except Exception as e:
-            st.error(f"Unable to load model. Please check the specified path:\n{model_path}")
+            st.error(f"❌ Unable to load model. Please check the specified path:\n{model_path}")
             st.error(f"Error details: {e}")
+
 else:
     st.error("Please Select Model in Sidebar")
 
