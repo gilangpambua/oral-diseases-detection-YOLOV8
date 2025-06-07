@@ -97,3 +97,8 @@ if source_img:
                             st.write("---")
                 except Exception as ex:
                     st.write("No image is uploaded yet!")
+else:
+    if not model:
+        st.warning("Model is not loaded yet.")
+    if not source_img:
+        st.info("Please upload an image to perform detection.")
