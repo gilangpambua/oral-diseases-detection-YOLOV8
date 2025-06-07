@@ -8,7 +8,7 @@ root_path = file_path.parent
 if root_path not in sys.path:
     sys.path.append(str(root_path))
 
-ROOT = root_path.relative_to(Path.cwd())
+ROOT = root_path
 
 SOURCES_LIST = ["Image"]
 

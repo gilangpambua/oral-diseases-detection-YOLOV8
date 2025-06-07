@@ -37,12 +37,12 @@ model_path = ""
 model = None
 
 if model_type:
-    model_path = Path(config.DETECTION_MODEL_DIR, str(model_type))
+    model_path = config.DETECTION_MODEL_DIR / model_type
     if not model_path.exists():
         st.error(f"Model file does NOT exist at path:\n{model_path}")
     else:
         try:
-            model = load_model(model_path)
+            model = load_model(str(model_path))
         except Exception as e:
             st.error(f"Unable to load model. Please check the specified path:\n{model_path}")
             st.error(f"Error details: {e}")
