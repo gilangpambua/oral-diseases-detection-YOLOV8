@@ -6,7 +6,7 @@ import config
 
 @st.cache_resource
 def load_model(model_path):
-    model = YOLO(str(model_path))
+    model = YOLO(model_path)
     return model
 
 st.set_page_config(
@@ -19,7 +19,7 @@ st.title("Oral Diseases Detection With YOLOV8")
 
 st.sidebar.header("Model Configuration")
 
-task_type = "Detection"
+task_type ="Detection"
 
 model_type = None
 if task_type == "Detection":
@@ -34,24 +34,15 @@ confidence = float(st.sidebar.slider(
     "Select Model Confidence", 5, 100, 50)) / 100
 
 model_path = ""
-model = None
-
 if model_type:
-    model_path = config.DETECTION_MODEL_DIR / model_type
-
-    st.write(f"🔍 Absolute model path: {model_path.resolve()}")  # <-- Tambahkan di sini
-
-    if not model_path.exists():
-        st.error(f"❌ Model file does NOT exist at path:\n{model_path}")
-    else:
-        try:
-            model = load_model(str(model_path))  # convert to string
-        except Exception as e:
-            st.error(f"❌ Unable to load model. Please check the specified path:\n{model_path}")
-            st.error(f"Error details: {e}")
-
+    model_path = Path(config.DETECTION_MODEL_DIR, str(model_type))
 else:
     st.error("Please Select Model in Sidebar")
+
+try:
+    model = load_model(model_path)
+except Exception as e:
+    st.error(f"Unable to load model. Please check the specified path: {model_path}")
 
 st.sidebar.header("Image")
 
@@ -71,7 +62,7 @@ with col1:
             use_column_width=True
         )
 
-if source_img and model:
+if source_img:
     if st.button("Execution"):
         with st.spinner("Running..."):
             res = model.predict(uploaded_image, conf=confidence)
@@ -82,32 +73,27 @@ if source_img and model:
                 st.image(res_plotted,
                          caption="Detected Image",
                          use_column_width=True)
-
+                
             st.markdown("---")
             st.subheader("Detection Results")
 
             if len(boxes) == 0:
-                st.write("No oral diseases were detected")
+                st.write("no oral diseases were detected")
             else:
                 try:
                     with st.expander("Detection Results"):
                         for box in boxes:
                             class_name = model.names[int(box.cls)]
-                            confidence_score = box.conf.item() * 100
+                            confidence = box.conf.item() * 100
                             x_center, y_center, width, height = [round(coord, 4) for coord in box.xywh.tolist()[0]]
 
                             st.write(f"Class: {class_name}")
-                            st.write(f"Confidence: {confidence_score:.2f}%")
+                            st.write(f"Confidence: {confidence:.2f}%")
                             st.write(f"Bounding Box Coordinates:")
                             st.write(f" - X Center: {x_center}")
                             st.write(f" - Y Center: {y_center}")
-                            st.write(f" - Width: {width}")
+                            st.write(f" - Width: {width}") 
                             st.write(f" - Height: {height}")
                             st.write("---")
                 except Exception as ex:
-                    st.write("Error showing detection results:", ex)
-else:
-    if not model:
-        st.warning("Model is not loaded yet.")
-    if not source_img:
-        st.info("Please upload an image to perform detection.")
+                    st.write("No image is uploaded yet!")
