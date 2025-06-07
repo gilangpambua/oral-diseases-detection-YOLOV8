@@ -13,8 +13,8 @@ ROOT = root_path.relative_to(Path.cwd())
 SOURCES_LIST = ["Image"]
 
 DETECTION_MODEL_DIR = ROOT / 'weights' / 'detection'
-YOLOv8n = DETECTION_MODEL_DIR / "Best_YOLOV8N.pt",
-YOLOv8s = DETECTION_MODEL_DIR / "Best_YOLOV8S.pt",
+YOLOv8n = DETECTION_MODEL_DIR / "Best_YOLOV8N.pt"
+YOLOv8s = DETECTION_MODEL_DIR / "Best_YOLOV8S.pt"
 YOLOv8m = DETECTION_MODEL_DIR / "Best_YOLOV8M.pt"
 
 DETECTION_MODEL_LIST = [

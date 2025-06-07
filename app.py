@@ -41,7 +41,7 @@ model_type = st.sidebar.selectbox("Select Model", config.DETECTION_MODEL_LIST)
 confidence = st.sidebar.slider("Select Model Confidence", 5, 100, 50) / 100
 
 # Load model
-model_path = Path(config.DETECTION_MODEL_DIR, str(model_type))
+model_path = str(Path(config.DETECTION_MODEL_DIR) / model_type)
 model = load_model(model_path)
 
 if not model:
